@@ -1,2 +1,39 @@
-<app-search-bar></app-search-bar>
-<router-outlet></router-outlet>
+<div *ngIf="!this.logged">
+    <div class="body">
+        <div id="window">
+        <h1> Login </h1>
+        <br>
+        <br>
+        <br>
+        <div class="data"> 
+            <label for="username">
+            <br>
+            <input id="username" [(ngModel)]="this.username" type="text" name="" placeholder="Login">
+            </label>
+            <br>
+            <br>
+            <br>
+
+            <label for = "user-pin">
+
+            <br>
+            <input type="password" [(ngModel)]="this.password" id = "user-pin" placeholder="Password">
+            <br>
+            <br>
+            <br>
+            <button id="LoginBtn" (click)="this.login()"> Login </button>
+
+            <br>
+            <br>
+            <br>
+            </label>
+        </div>
+    </div>
+</div>
+</div>
+
+<div *ngIf="this.logged" class="logged">
+    <app-search-bar></app-search-bar>
+    <router-outlet></router-outlet>
+    <button class="logout" (click)="this.logout()">Logout</button>
+</div>

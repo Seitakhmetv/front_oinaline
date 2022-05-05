@@ -15,7 +15,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { HttpErrorsInterceptor } from './interceptors/http-errors.interceptor';
-import { HttpHeadersInterceptor } from './interceptors/http-headers.interceptor';
+import { AuthInterceptor } from './interceptors/AuthInterceptor';
 import { DetailsComponent } from './components/details/details.component';
 import { GameTabsComponent } from './components/game-tabs/game-tabs.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -51,7 +51,7 @@ import { GameAddComponent } from './components/game-add/game-add.component'
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: HttpHeadersInterceptor,
+      useClass: AuthInterceptor,
       multi: true,
     }
 ],

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Game } from 'src/app/models';
+import { Game, Genre, Platforms, Publishers, Screenshots, Types } from 'src/app/models';
 import { HttpService } from 'src/app/services/http.service';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-game-add',
@@ -9,8 +10,18 @@ import { HttpService } from 'src/app/services/http.service';
 })
 export class GameAddComponent implements OnInit {
 
-  selectedGame: Game
   games: Array<Game>
+  platforms: Array<Platforms>
+  publishers: Array<Publishers>
+  genres: Array<Genre>
+  types: Array<Types>
+  trailer: string
+
+  type_title = ""
+  type_id: number
+  
+  description: string
+  metacritic: number
 
   constructor(private httpService: HttpService) { }
 
@@ -25,9 +36,36 @@ export class GameAddComponent implements OnInit {
     })
   }
 
-  chooseGame(id: string){
-    this.httpService.addGame(id);
-    alert("Added to Favorites!!!")
+  getPlatforms(){
+    this.httpService.getPlatforms().subscribe((data)=>{
+      this.platforms = data;
+    })
   }
+
+  getPublishers(){
+    this.httpService.getPublisher().subscribe((data)=>{
+      this.publishers = data;
+    })
+  }
+
+  getTypes(){
+    this.httpService.getTypes().subscribe((data)=>{
+      this.platforms = data;
+    })
+  }
+
+  getGenres(){
+    this.httpService.getGenres().subscribe((data)=>{
+      this.genres = data;
+    })
+  }
+
+  OnSubmit(){
+    this.httpService.addType(this.type_title).subscribe((data)=>{
+      console.log(data)
+    })
+    alert("Added")
+  }
+
   
 }

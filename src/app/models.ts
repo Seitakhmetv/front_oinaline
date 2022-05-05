@@ -13,26 +13,26 @@ export interface Game {
   trailer: string;
 } 
 
-// export interface APIResponse<T> {
-//     results: Array<T>;
-// }
-
-interface Genre {
+export interface Genre {
   title: string;
 }
 
-interface Platforms {
+export interface Platforms {
   title: string;
 }
 
-interface Types {
+export interface Types {
   title: string;
 }
 
-interface Publishers {
+export interface Publishers {
   title: string;
 }
 
-interface Screenshots {
+export interface Screenshots {
   url: string;
+}
+
+export interface AuthToken{
+  token: string;
 }
