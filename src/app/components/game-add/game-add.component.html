@@ -1,0 +1,16 @@
+<div class="favorites">
+    <mat-form-field>
+        <mat-label>Games</mat-label>
+        <mat-select
+          panelClass="game-select"
+          [(ngModel)]="selectedGame"
+          (selectionChange)="chooseGame(selectedGame.id)"
+        >
+          <mat-option 
+          *ngFor="let el of games" 
+          [value]="el.id">
+            {{el.title}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+</div>

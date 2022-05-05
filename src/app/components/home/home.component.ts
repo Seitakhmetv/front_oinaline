@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { APIResponse, Game } from 'src/app/models';
+import { Game } from 'src/app/models';
 import { HttpService } from 'src/app/services/http.service';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
@@ -11,7 +11,6 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  public sort: string;
   public games: Array<Game>;
   private routeSub: Subscription;
   private gameSub: Subscription;
@@ -27,19 +26,15 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.routeSub = this.activatedRoute.params.subscribe((params: Params) => {
-      if (params['game-search']) {
-        this.searchGames('metacrit', this.page, this.page_size, params['game-search']);
-      } else {
-        this.searchGames('metacrit', this.page, this.page_size);
-      }
+      this.searchGames();
     });
   }
 
-  searchGames(sort: string, page: number, page_size: number, search?: string): void {
+  searchGames(): void {
     this.gameSub = this.httpService
-      .getGameList(sort, page, page_size, search)
-      .subscribe((gameList: APIResponse<Game>) => {
-        this.games = gameList.results;
+      .getGameList()
+      .subscribe((gameList: Array<Game>) => {
+        this.games = gameList;
         console.log(gameList);
       });
   }
@@ -60,12 +55,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   nextPage(){
     this.page += 1;
-    this.searchGames(this.sort, this.page, this.page_size);
+
+    console.log(this.games)
   }
 
   prevPage(){
     this.page -= 1;
-    this.searchGames(this.sort, this.page, this.page_size);
   }
 
   gamesPerPage(page_size: number){

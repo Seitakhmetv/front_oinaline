@@ -1,42 +1,23 @@
-<div class="filters">
-  <mat-form-field>
-    <mat-label>Sort</mat-label>
-    <mat-select
-      panelClass="sort-select"
-      [(ngModel)]="sort"
-      (selectionChange)="searchGames(sort, page, page_size)"
-    >
-      <mat-option value="name">Name</mat-option>
-      <mat-option value="-released">Released</mat-option>
-      <mat-option value="-added">Added</mat-option>
-      <mat-option value="-created">Created</mat-option>
-      <mat-option value="-updated">Updated</mat-option>
-      <mat-option value="-rating">Rating</mat-option>
-      <mat-option value="metacritic">Metacritic</mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-
 <div class="games">  
   <ng-container *ngFor="let game of games">
     <div class="game" (click)="openGameDetails(game.id)">
       <div class="game-thumb-container">
         <img
-          *ngIf="game.background_image"
-          src="{{ game.background_image }}"
+          *ngIf="game.screenshots[0].url"
+          src="{{ game.screenshots[0].url }}"
           alt="thumbnail"
           class="game-thumbnail"
         />
-      <p *ngIf="!game.background_image">No image</p>
+      <p *ngIf="!game.screenshots[0].url">No image</p>
       </div>
       <div class="game-description">
-        <p class="game-name">{{ game.name }}</p>
+        <p class="game-name">{{ game.title }}</p>
         <div class="game-platforms">
           <img
-            *ngFor="let gamePlatform of game.parent_platforms"            
+            *ngFor="let gamePlatform of game.platforms"            
             class="game-platform"
-            src="/assets/images/platforms/{{ gamePlatform.platform.name}}.svg"
-            alt="{{ gamePlatform.platform.name }}"
+            src="/assets/images/platforms/{{ gamePlatform.title}}.svg"
+            alt="{{ gamePlatform.title }}"
           />
         </div>
       </div>
@@ -53,25 +34,3 @@
       <fa-icon [icon]="faArrowRight"></fa-icon>
     </button>
   </div>
-  <div class="pagination-size">
-    <mat-form-field>
-      <mat-label>Games per page</mat-label>
-      <mat-select
-        panelClass="sort-select"
-        [(ngModel)]="page_size"
-        (selectionChange)="searchGames(sort, page, page_size)"
-      >
-        <mat-option value="20">20</mat-option>
-        <mat-option value="28">28</mat-option>
-        <mat-option value="36">36</mat-option>
-        <mat-option value="44">44</mat-option>
-        <mat-option value="58">58</mat-option>
-        <mat-option value="66">66</mat-option>
-        <mat-option value="74">74</mat-option>
-        <mat-option value="82">82</mat-option>
-        <mat-option value="90">90</mat-option>
-        <mat-option value="98">98</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-</div>

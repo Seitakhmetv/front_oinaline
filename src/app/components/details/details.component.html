@@ -2,20 +2,17 @@
     <div class="game-banner">
       <img
         class="game-banner-img"
-        src="{{game.background_image}}"
+        src="{{game.screenshots[2].url}}"
         alt="background image"
       />
     </div>
     <div class="game-content">
       <div class="details-wrapper">
         <div class="game-header">
-          <h1 class="game-header-title">{{ game.name }}</h1>
-          <h2 class="game-header-release-date">
-            Release: {{ game.released | date }}
-          </h2>
+          <h1 class="game-header-title">{{ game.title }}</h1>
           <p class="game-header-genres">
             <span *ngFor="let genre of game.genres; let last = last"
-            >{{ genre.name }}<span *ngIf="!last">, </span></span
+            >{{ genre.title }}<span *ngIf="!last">, </span></span
           >
           </p>
           <div class="game-gauge">
@@ -33,7 +30,7 @@
             <a
               class="game-gauge-label"
               target="_blank"
-              href="{{ game.metacritic_url }}"
+              href=""
               >Metacritic</a
             >
           </div>

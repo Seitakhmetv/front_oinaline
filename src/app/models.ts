@@ -1,50 +1,38 @@
 export interface Game {
   id: string;
-  background_image: string;
-  name: string;
-  released: string;
-  metacritic_url: string;
-  website: string;
+  // background_image: string;
+  title: string;
+  // website: string;
   description: string;
   metacritic: number;
+  types: Array<Types>;
   genres: Array<Genre>;
-  parent_platforms: Array<ParentPlatform>;
+  platforms: Array<Platforms>;
   publishers: Array<Publishers>;
-  ratings: Array<Rating>;
   screenshots: Array<Screenshots>;
-  trailers: Array<Trailer>;
-}
+  trailer: string;
+} 
 
-export interface APIResponse<T> {
-    results: Array<T>;
-}
+// export interface APIResponse<T> {
+//     results: Array<T>;
+// }
 
 interface Genre {
-  name: string;
+  title: string;
 }
 
-interface ParentPlatform {
-  platform: {
-    name: string;
-  };
+interface Platforms {
+  title: string;
+}
+
+interface Types {
+  title: string;
 }
 
 interface Publishers {
-  name: string;
-}
-
-interface Rating {
-  id: number;
-  count: number;
   title: string;
 }
 
 interface Screenshots {
-  image: string;
-}
-
-interface Trailer {
-  data: {
-    max: string;
-  };
+  url: string;
 }
